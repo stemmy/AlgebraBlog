@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    
+	use Sluggable;
+
 	/**
 	*
 	* The attributes that are mass assignable
@@ -15,7 +17,7 @@ class Post extends Model
 	*
 	*/
 
-	protected $fillable = ['user_id', 'title', 'content'];
+	protected $fillable = ['user_id', 'title', 'slug', 'content'];
 
 	/**
 	*
@@ -92,6 +94,20 @@ class Post extends Model
 		return $this->update($post);
 
 	}
+
+	/**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
 
 
