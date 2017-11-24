@@ -98,7 +98,15 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //ZADAĆA
+        $user_id = Sentinel::getUser()->id;
+        $post = Post::find($id);
+
+        if ($user_id == $post->user_id) {
+            return view('admin.posts.edit', ['post'=>$post]);
+        }else{
+            $message = session()->flash('info', 'You cannot edit this post.');
+            return redirect()->route('admin.posts.index')->withFlashMessage($message);
+        }
     }
 
     /**
@@ -108,9 +116,24 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //ZADAĆA
+
+        $post = Post::find($id);
+        $input = $request->except('_token, user_id, id');
+
+        $data = array(
+
+            'title'   =>  trim($input['title']),
+            'content'   =>  $input['content']
+
+            );
+
+        $post->updatePost($data);
+
+        $message = session()->flash('success', 'You have successfully updated new post.');
+
+        return redirect()->route('admin.posts.index')->withFlashMessage($message);
     }
 
     /**

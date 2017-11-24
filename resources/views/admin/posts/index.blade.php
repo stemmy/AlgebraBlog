@@ -22,6 +22,7 @@
                             <th>Title</th>
                             <th>User</th>
                             <th>Created at</th>
+                            <th>Updated at</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -32,7 +33,8 @@
                                     <a href="{{ route('admin.posts.show', $post->id) }}">{{ $post->title }}</a>
                                 </td>
                                 <td>{{ $post->user->email }}</td>
-                                <td>{{ $post->created_at }}</td>
+                                <td>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</td>
+                                <td>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</td>
                                 <td>
                                     <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-default">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
