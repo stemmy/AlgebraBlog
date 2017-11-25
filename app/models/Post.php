@@ -89,7 +89,7 @@ class Post extends Model
 	*
 	*/
 
-	public function updatePost($post = array(), $id = ''){
+	public function updatePost($post = array()){
 
 		return $this->update($post);
 

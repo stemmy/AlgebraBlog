@@ -131,7 +131,7 @@ class PostController extends Controller
 
         $post->updatePost($data);
 
-        $message = session()->flash('success', 'You have successfully updated new post.');
+        $message = session()->flash('success', 'You have successfully updated the post.');
 
         return redirect()->route('admin.posts.index')->withFlashMessage($message);
     }
