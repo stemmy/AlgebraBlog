@@ -59,3 +59,8 @@ Route::group(['prefix' => 'admin'], function () {
 
   	]]);
 });
+
+//Post Page
+Route::post('/store', ['as' => 'post.store', 'uses' => 'IndexController@store']);
+//Post Page
+Route::get('/{slug}', ['as' => 'post.show', 'uses' => 'IndexController@show']);

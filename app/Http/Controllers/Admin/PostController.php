@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Sentinel;
@@ -101,12 +101,12 @@ class PostController extends Controller
         $user_id = Sentinel::getUser()->id;
         $post = Post::find($id);
 
-        if ($user_id == $post->user_id) {
+       // if ($user_id == $post->user_id) {
             return view('admin.posts.edit', ['post'=>$post]);
-        }else{
-            $message = session()->flash('info', 'You cannot edit this post.');
-            return redirect()->route('admin.posts.index')->withFlashMessage($message);
-        }
+        //}else{
+          //  $message = session()->flash('info', 'You cannot edit this post.');
+          //  return redirect()->route('admin.posts.index')->withFlashMessage($message);
+        // }
     }
 
     /**
@@ -116,7 +116,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
 
         $post = Post::find($id);
@@ -131,7 +131,7 @@ class PostController extends Controller
 
         $post->updatePost($data);
 
-        $message = session()->flash('success', 'You have successfully updated the post.');
+        $message = session()->flash('success', 'You have successfully updated the post with id '.$post->id);
 
         return redirect()->route('admin.posts.index')->withFlashMessage($message);
     }

@@ -36,10 +36,12 @@
                                 <td>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</td>
                                 <td>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-default">
+                                    
+                                    <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-default {{ (Sentinel::getUser()->id != $post->user_id) ? 'disabled' : '' }}">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         Edit
                                     </a>
+                                   
                                     <a href="{{ route('admin.posts.destroy', $post->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Delete

@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Update Post')
+@section('title')
+    Edit {{$post->title}}
+@endsection
 
 @push('stylesheet')
 <!-- Include Editor style. -->
@@ -27,12 +29,10 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Update Post</h3>
+                <h3 class="panel-title">Edit {{$post->title}}</h3>
             </div>
             <div class="panel-body">
                 <form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.posts.update', $post->id) }}">
-                <input type="hidden" name="_method" value="PUT">
-                <input type="hidden" name="_method" value="PATCH">
                 <fieldset>
                     <div class="form-group {{ ($errors->has('title')) ? 'has-error' : '' }}">
                         <input class="form-control" placeholder="Post title" name="title" type="text" value="{{ ($post->title != old('title') && empty(old('title'))) ? $post->title : old('title') }}" />
@@ -44,7 +44,8 @@
                         </textarea>
                         {!! ($errors->has('content') ? $errors->first('content', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
-                    <input name="_token" value="{{ csrf_token() }}" type="hidden">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Update">
                 </fieldset>
                 </form>
