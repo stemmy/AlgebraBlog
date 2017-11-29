@@ -53,4 +53,40 @@
             </div>
         </div>
     @endif
+
+    <div class="row" style="margin: 50px 0;">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+
+            <h2 id="comments">Comments:</h2>
+
+            @if($post->comments->count() > 0)
+
+                @foreach($post->comments as $comment)
+
+                <div class="media">
+                  <div class="media-body">
+                    <div>
+                         <small>
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            {{ $comment->user->email }} | 
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($comment->created_at))->diffForHumans() }}
+                        </small>
+                    </div>
+                    {{ $comment->content }}
+                  </div>
+                </div>
+                <hr>
+
+                @endforeach
+
+            @else
+
+            <p>No comments!</p>
+
+            @endif
+
+        </div>
+    </div>
+
 @stop
