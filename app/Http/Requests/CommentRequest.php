@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Sentinel;
+
 class CommentRequest extends FormRequest
 {
     /**
@@ -13,7 +15,11 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if(Sentinel::check()){
+            return true;
+        }
+            
+        return false;
     }
 
     /**

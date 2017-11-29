@@ -7,7 +7,7 @@
 @section('content')
     <div class="page-header">
         <div class='btn-toolbar'>
-            <a class="btn btn-primary btn-lg" href="{{ url()->previous() }}">
+            <a class="btn btn-primary btn-lg" href="{{ url('/') }}">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 Go Back
             </a>
@@ -33,7 +33,7 @@
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
                 <h2>Leave a comment:</h2>
-                <form accept-charset="UTF-8" role="form" method="post" action="{{ route('post.store') }}">
+                <form accept-charset="UTF-8" role="form" method="post" action="{{ route('comment.store') }}">
                     <div class="form-group {{ ($errors->has('content')) ? 'has-error' : '' }}">
                         <textarea class="form-control" name="content" id="post-content" rows="10"></textarea>
                         {!! ($errors->has('content') ? $errors->first('content', '<p class="text-danger">:message</p>') : '') !!}
@@ -59,16 +59,20 @@
 
             <h2 id="comments">Comments:</h2>
 
-            @if($post->comments->count() > 0)
+            @if($post->comments()->count() > 0)
 
-                @foreach($post->comments as $comment)
+                @foreach($post->comments() as $comment)
 
                 <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                          <img class="media-object" src="https://s.gravatar.com/avatar/{{ md5($comment->user->email) }}?d=mm">
+                        </a>
+                    </div>
                   <div class="media-body">
+                    <h4 class="media-heading">{{ $comment->user->email }}</h4>
                     <div>
                          <small>
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            {{ $comment->user->email }} | 
                             <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                             {{ \Carbon\Carbon::createFromTimeStamp(strtotime($comment->created_at))->diffForHumans() }}
                         </small>
@@ -79,7 +83,7 @@
                 <hr>
 
                 @endforeach
-
+                {!! $post->comments()->links('vendor.pagination.comments') !!}
             @else
 
             <p>No comments!</p>

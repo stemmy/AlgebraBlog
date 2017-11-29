@@ -63,7 +63,7 @@ class Post extends Model
 
 	public function comments(){
 
-		return $this->hasMany(static::$commentsModel, 'post_id')->orderBy('created_at', 'DESC');
+		return $this->hasMany(static::$commentsModel, 'post_id')->where('status', 1)->orderBy('created_at', 'DESC')->paginate(10);
 
 	}
 

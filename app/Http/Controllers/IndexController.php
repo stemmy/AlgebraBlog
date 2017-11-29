@@ -44,17 +44,16 @@ class IndexController extends Controller
 
     }
 
-    public function store(CommentRequest $request){
+    public function storeComment(CommentRequest $request){
 
     // ZADAĆA POHRANITI KOMENTAR
     $user_id = Sentinel::getUser()->id;
-    $input = $request->except('_token');
 
     $data = array(
 
       'user_id' =>  $user_id,
-      'post_id' =>  $input['post_id'],
-      'content' =>  $input['content']
+      'post_id' =>  $request->get('post_id'),
+      'content' =>  $request->get('content')
 
     );
 
@@ -62,7 +61,7 @@ class IndexController extends Controller
 
     $comment->saveComment($data);
 
-    $message = session()->flash('success', 'You have successfully add new comment.');
+    $message = session()->flash('success', 'You have successfully added new comment.');
 
     return redirect()->back()->withFlashMessage($message);
 
