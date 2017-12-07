@@ -16,7 +16,6 @@ class Post extends Model
 	* @var array
 	*
 	*/
-
 	protected $fillable = ['user_id', 'title', 'slug', 'content'];
 
 	/**
@@ -69,6 +68,20 @@ class Post extends Model
 
 	/**
 	*
+	* Returns the pendingComments relationship
+	*
+	* @return \Illuminate\Database\Eloquent\Relations\HasMany
+	*
+	*/
+
+	public function pendingComments(){
+
+		return $this->hasMany(static::$commentsModel, 'post_id')->where('status', 0);
+
+	}
+
+	/**
+	*
 	* Save Post
 	* @param array $post
 	* @return void
@@ -108,7 +121,5 @@ class Post extends Model
             ]
         ];
     }
-
-
 
 }

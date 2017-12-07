@@ -40,7 +40,7 @@ class IndexController extends Controller
 
       $post = Post::where('slug', $slug)->first();
 
-      return view('post.show')->with('post', $post);
+      return view('post.show', compact('post'));
 
     }
 

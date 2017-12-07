@@ -36,8 +36,6 @@ Route::post('password/reset/{code}', ['as' => 'auth.password.reset.attempt', 'us
 Route::get('password/reset', ['as' => 'auth.password.request.form', 'uses' => 'Auth\PasswordController@getRequest']);
 Route::post('password/reset', ['as' => 'auth.password.request.attempt', 'uses' => 'Auth\PasswordController@postRequest']);
 
-
-
 /*############# ADMIN ##############*/
 Route::group(['prefix' => 'admin'], function () {
   // Dashboard
