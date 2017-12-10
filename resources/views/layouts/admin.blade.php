@@ -40,7 +40,7 @@
                             <li class="{{ Request::is('admin/roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
                         @endif 
                             <li class="{{ Request::is('admin/posts*') ? 'active' : '' }}"><a href="{{ route('admin.posts.index') }}">Posts</a></li>
-                            <li class="{{ Request::is('admin/comments*') ? 'active' : '' }}"><a href="#">Comments <span class="badge">{{ Comments::pendingComments() }}</span></a></li>
+                            <li class="{{ Request::is('admin/comments*') ? 'active' : '' }}"><a href="{{ route('admin.comments.index') }}">Comments <span class="badge">{{ Comments::pendingComments() }}</span></a></li>
                         
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -48,6 +48,7 @@
                           <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user"></span> {{ Sentinel::getUser()->email }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                <li><a href="{{ route('index') }}">Public site</a></li>
                               <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
                             </ul>
                           </li>

@@ -56,6 +56,16 @@ Route::group(['prefix' => 'admin'], function () {
   	'destroy'	=>	'admin.posts.destroy'
 
   	]]);
+
+  //Comments
+  Route::resource('comments', 'Admin\CommentController', ['names' => [
+
+    'index'   =>  'admin.comments.index',
+    'show'    =>  'admin.comments.show',
+    'update'  =>  'admin.comments.update',
+    'destroy' =>  'admin.comments.destroy'
+
+    ]]);
 });
 
 //Post Page

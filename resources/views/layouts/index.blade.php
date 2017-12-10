@@ -40,6 +40,7 @@
                         <li>
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user"></span> {{ Sentinel::getUser()->email }} <span class="caret"></span></a>
                           <ul class="dropdown-menu">
+                            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
                           </ul>
                         </li>
